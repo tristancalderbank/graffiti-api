@@ -55,8 +55,12 @@ pg.connect(config, function (err, client, done) {
 			}
 			
 			else if (results && results.rows) {
-				getTweets(results.rows, twitLat, twitLon);
-				res.status(200).send(JSON.stringify(results.rows));
+				getTweets(results.rows, twitLat, twitLon).then(
+					function () {
+						res.status(200).send(JSON.stringify(results.rows));
+					}
+				);
+				
 				console.log(results.rows);
 			}	
 			
@@ -79,7 +83,7 @@ pg.connect(config, function (err, client, done) {
 		.then(function(tweets) {
 			tweets.statuses.forEach(function(tweet) {
 				var displayItem = {
-					userName: tweet['screen_name'],
+					userName: tweet['user']['name'],
 					messageText: tweet['text']
 				};
 				results.push(displayItem);
