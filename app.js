@@ -20,6 +20,34 @@ var TwitterClient = new Twitter({
   access_token_secret: process.env.AccessTokenSecret
 });
 
+function getTweets(results, lat, lon) {
+	var params = {
+		q: 'local event',
+		//geocode: lat + ',' + lon + ',0.1km',
+		count: 2
+	};
+
+	// Twitter API Request 
+	return TwitterClient.get('search/tweets', params)
+	.then(function(tweets) {
+		tweets.statuses.forEach(function(tweet) {
+			var displayItem = {
+				userName: tweet['user']['name'],
+				content: tweet['text']
+			};
+			results.push(displayItem);
+			console.log(displayItem);
+		})
+
+		console.log("TWEET RESULTS:", results);
+
+		return Promise.resolve(results);
+
+	}).catch(function(error) {
+		console.error(error);
+	});
+}
+
 pg.connect(config, function (err, client, done) {
 
 	if (err) {
@@ -55,9 +83,11 @@ pg.connect(config, function (err, client, done) {
 			}
 			
 			else if (results && results.rows) {
-				getTweets(results.rows, twitLat, twitLon);
-				res.status(200).send(JSON.stringify(results.rows));				
-				console.log(results.rows);
+				return getTweets(results.rows, twitLat, twitLon)
+				.then(items => {
+					res.status(200).send(JSON.stringify(items));				
+					console.log("RESULTS:", items);
+				});
 			}	
 			
 			else {
@@ -65,30 +95,6 @@ pg.connect(config, function (err, client, done) {
 			}
 
 	});
-
-	function getTweets(results, lat, lon) {
-		var params = {
-			q: 'local event',
-			//geocode: lat + ',' + lon + ',0.1km',
-			count: 2
-		};
-		console.log(results);
-
-		// Twitter API Request 
-		TwitterClient.get('search/tweets', params)
-		.then(function(tweets) {
-			tweets.statuses.forEach(function(tweet) {
-				var displayItem = {
-					userName: tweet['user']['name'],
-					messageText: tweet['text']
-				};
-				results.push(displayItem);
-				console.log(displayItem);
-			});
-		}).catch(function(error) {
-			console.error(error);
-		});
-	}
 
 
 	// POST content
