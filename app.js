@@ -37,8 +37,6 @@ pg.connect(config, function (err, client, done) {
 
 		console.log("GET /content");
 
-	//	console.log(req.query);
-
 		let lat = parseInt(req.query.lat);
 		let long = parseInt(req.query.long);
 
@@ -53,16 +51,10 @@ pg.connect(config, function (err, client, done) {
 					//geocode: ,
 					count: 2
 				};
-				//console.log(results);
 
 				// Twitter API Request 
 				TwitterClient.get('search/tweets', params)
 				.then(function(tweets) {
-					//for (tweet in tweets.statuses){
-					//	results.push({
-					//		userName: tweet.user,
-					//		messageText: tweet.text
-					//	});
 					tweets.statuses.forEach(function(tweet) {
 						var displayItem = {
 							userName: tweet['user']['name'],
@@ -70,9 +62,6 @@ pg.connect(config, function (err, client, done) {
 						};
 						console.log(displayItem);
 					});
-					//console.log(tweets.statuses[0]['user']['name']);
-				//	}
-					//console.log(tweets);
 				}).catch(function(error) {
 					console.error(error);
 				});
