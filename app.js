@@ -55,7 +55,7 @@ pg.connect(config, function (err, client, done) {
 			}
 			
 			else if (results && results.rows) {
-				getTweets(results.rows);
+				getTweets(results.rows, twitLat, twitLon);
 				res.status(200).send(JSON.stringify(results.rows));
 				console.log(results.rows);
 			}	
@@ -66,10 +66,10 @@ pg.connect(config, function (err, client, done) {
 
 	});
 
-	function getTweets(results) {
+	function getTweets(results, lat, lon) {
 		var params = {
 			q: 'local event',
-			//geocode: lat + ',' + long + ',0.1km',
+			geocode: lat + ',' + long + ',0.1km',
 			count: 2
 		};
 		console.log(results);
