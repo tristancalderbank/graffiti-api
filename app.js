@@ -24,7 +24,7 @@ function getTweets(results, lat, lon) {
 	var params = {
 		q: 'local event',
 		//geocode: lat + ',' + lon + ',0.1km',
-		count: 2
+		count: 10
 	};
 
 	// Twitter API Request 
