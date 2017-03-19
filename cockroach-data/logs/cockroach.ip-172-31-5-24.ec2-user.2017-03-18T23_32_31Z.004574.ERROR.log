@@ -1,0 +1,27 @@
+E170318 23:32:31.142115 151 util/log/clog.go:1017  [config] file created at: 2017/03/18 23:32:31
+E170318 23:32:31.142115 151 util/log/clog.go:1017  [config] running on machine: ip-172-31-5-24
+E170318 23:32:31.142115 151 util/log/clog.go:1017  [config] binary: CockroachDB CCL beta-20170309 (linux amd64, built 2017/03/09 16:31:10, go1.8)
+E170318 23:32:31.142115 151 util/log/clog.go:1017  [config] arguments: [cockroach start]
+E170318 23:32:31.142115 151 util/log/clog.go:1017  line format: [IWEF]yymmdd hh:mm:ss.uuuuuu goid file:line msg utf8=✓
+E170318 23:32:31.142115 151 storage/queue.go:628  [replicate,n1,s1,r1/1:/{Min-Table/0},@c420441500] range requires a replication change, but lacks a quorum of live replicas (0/1)
+E170318 23:42:31.162210 183 storage/queue.go:708  [n1,replicate] 8 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170318 23:52:31.163557 183 storage/queue.go:708  [n1,replicate] 8 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170319 00:02:31.165281 183 storage/queue.go:708  [n1,replicate] 8 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170319 00:12:31.162873 183 storage/queue.go:708  [n1,replicate] 8 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170319 00:22:31.162226 183 storage/queue.go:708  [n1,replicate] 8 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170319 00:32:31.162532 183 storage/queue.go:708  [n1,replicate] 8 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170319 00:42:31.163392 183 storage/queue.go:708  [n1,replicate] 8 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170319 00:52:31.162170 183 storage/queue.go:708  [n1,replicate] 8 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170319 01:02:31.162747 183 storage/queue.go:708  [n1,replicate] 9 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170319 01:12:31.164622 183 storage/queue.go:708  [n1,replicate] 9 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170319 01:22:31.162197 183 storage/queue.go:708  [n1,replicate] 9 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170319 01:32:31.165764 183 storage/queue.go:708  [n1,replicate] 9 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170319 01:42:31.162542 183 storage/queue.go:708  [n1,replicate] 9 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170319 01:52:31.162899 183 storage/queue.go:708  [n1,replicate] 9 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170319 02:02:31.162174 183 storage/queue.go:708  [n1,replicate] 10 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170319 02:12:31.163495 183 storage/queue.go:708  [n1,replicate] 10 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170319 02:22:31.163365 183 storage/queue.go:708  [n1,replicate] 10 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170319 02:32:31.164040 183 storage/queue.go:708  [n1,replicate] 10 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170319 02:42:31.163526 183 storage/queue.go:708  [n1,replicate] 10 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170319 02:52:31.164110 183 storage/queue.go:708  [n1,replicate] 10 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"
+E170319 03:02:31.165220 183 storage/queue.go:708  [n1,replicate] 10 replicas failing with "0 of 0 stores with all attributes matching []; likely not enough nodes in cluster"

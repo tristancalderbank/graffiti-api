@@ -1,0 +1,22 @@
+{
+  "name": "graffiti-api",
+  "version": "0.0.0",
+  "description": "Geo location virtual graffiti + tagging app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tristancalderbank/graffiti-api"
+  },
+  "author": "",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/tristancalderbank/graffiti-api/issues"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "pg": "~6.1.4"
+  }
+}
