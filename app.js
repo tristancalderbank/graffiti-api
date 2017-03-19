@@ -36,10 +36,7 @@ function getTweets(results, lat, lon) {
 				content: tweet['text']
 			};
 			results.push(displayItem);
-			console.log(displayItem);
 		})
-
-		console.log("TWEET RESULTS:", results);
 
 		return Promise.resolve(results);
 
@@ -86,7 +83,6 @@ pg.connect(config, function (err, client, done) {
 				return getTweets(results.rows, twitLat, twitLon)
 				.then(items => {
 					res.status(200).send(JSON.stringify(items));				
-					console.log("RESULTS:", items);
 				});
 			}	
 			
