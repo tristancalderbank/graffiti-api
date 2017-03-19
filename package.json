@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "body-parser": "^1.17.1",
-    "pg": "~6.1.4"
+    "pg": "~6.1.4",
+    "twitter": "^1.7.0"
   }
 }

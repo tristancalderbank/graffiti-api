@@ -1,5 +1,3 @@
-
-
 const async = require('async');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -13,6 +11,15 @@ const config = {
   database: 'graffiti',
   port: 26257
 };
+
+var Twitter = require('twitter');
+var client = new Twitter({
+  consumer_key: process.env.APIKey,
+  consumer_secret: process.env.APISecret,
+  access_token_key: process.env.AccessToken,
+  access_token_secret: process.env.AccessTokenSecret
+});
+
 pg.connect(config, function (err, client, done) {
 
 	if (err) {
@@ -36,6 +43,11 @@ pg.connect(config, function (err, client, done) {
 		console.log(lat, long);
 
 		res.send('Recieved GET');
+
+		// Twitter API Request 
+		client.get('search/tweets', (response) => {
+			// TODO : Handle data here
+		});
 
 	});
 
