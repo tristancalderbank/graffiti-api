@@ -1,2 +1,5 @@
 # pem file
 *.pem
+
+#logs
+*.log
