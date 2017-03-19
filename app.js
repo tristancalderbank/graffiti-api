@@ -39,7 +39,9 @@ pg.connect(config, function (err, client, done) {
 
 		let lat = parseInt(req.query.lat);
 		let long = parseInt(req.query.long);
-
+		
+		let twitLat = parseFloat(req.query.lat);
+		let twitLon = parseFloat(req.query.long);
 		
 		async.waterfall([
 			function (next) {
@@ -48,9 +50,10 @@ pg.connect(config, function (err, client, done) {
 			function (results) {
 				var params = {
 					q: 'local event',
-					geocode: lat + ',' + long + ',0.1km',
+					geocode: twitLat.toString() + ',' + twitLon.toString() + ',100km',
 					count: 2
 				};
+				console.log(params.geocode);
 
 				// Twitter API Request 
 				TwitterClient.get('search/tweets', params)
