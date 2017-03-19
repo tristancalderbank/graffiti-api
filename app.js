@@ -13,7 +13,7 @@ const config = {
 };
 
 var Twitter = require('twitter');
-var client = new Twitter({
+var TwitterClient = new Twitter({
   consumer_key: process.env.APIKey,
   consumer_secret: process.env.APISecret,
   access_token_key: process.env.AccessToken,
@@ -49,15 +49,19 @@ pg.connect(config, function (err, client, done) {
 			}, 
 			function (results) {
 				var params = {
-					q: 'node.js',
+					q: 'local event',
 					//geocode: ,
 					count: 2
 				};
 
 				// Twitter API Request 
-				client.get('search/tweets', params)
+				TwitterClient.get('search/tweets', params)
 				.then(function(tweets) {
-					//results.push();
+					for (tweet in tweets)
+						results.push({
+							userName: tweet.user,
+							messageText: tweet.text
+						});
 					console.log(tweets);
 				}).catch(function(error) {
 					console.error(error);
