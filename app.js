@@ -55,12 +55,8 @@ pg.connect(config, function (err, client, done) {
 			}
 			
 			else if (results && results.rows) {
-				getTweets(results.rows, twitLat, twitLon).then(
-					function () {
-						res.status(200).send(JSON.stringify(results.rows));
-					}
-				);
-				
+				getTweets(results.rows, twitLat, twitLon);
+				res.status(200).send(JSON.stringify(results.rows));				
 				console.log(results.rows);
 			}	
 			
@@ -73,7 +69,7 @@ pg.connect(config, function (err, client, done) {
 	function getTweets(results, lat, lon) {
 		var params = {
 			q: 'local event',
-			geocode: lat + ',' + long + ',0.1km',
+			//geocode: lat + ',' + lon + ',0.1km',
 			count: 2
 		};
 		console.log(results);
@@ -87,7 +83,7 @@ pg.connect(config, function (err, client, done) {
 					messageText: tweet['text']
 				};
 				results.push(displayItem);
-				//console.log(displayItem);
+				console.log(displayItem);
 			});
 		}).catch(function(error) {
 			console.error(error);
