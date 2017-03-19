@@ -44,9 +44,17 @@ pg.connect(config, function (err, client, done) {
 
 		res.send('Recieved GET');
 
+		var params = {
+			//geocode: ,
+			count: 10
+		};
+
 		// Twitter API Request 
-		client.get('search/tweets', (response) => {
-			// TODO : Handle data here
+		client.get('search/tweets', params)
+		.then(function(tweets) {
+			console.log(tweets);
+		}).catch(function(error) {
+			console.error(error);
 		});
 
 	});
