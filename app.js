@@ -48,7 +48,7 @@ pg.connect(config, function (err, client, done) {
 			function (results) {
 				var params = {
 					q: 'local event',
-					//geocode: ,
+					geocode: lat + ',' + long + ',0.1km',
 					count: 2
 				};
 
@@ -57,7 +57,7 @@ pg.connect(config, function (err, client, done) {
 				.then(function(tweets) {
 					tweets.statuses.forEach(function(tweet) {
 						var displayItem = {
-							userName: tweet['user']['name'],
+							userName: tweet['screen_name'],
 							messageText: tweet['text']
 						};
 						console.log(displayItem);
