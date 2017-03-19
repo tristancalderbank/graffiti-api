@@ -40,8 +40,8 @@ pg.connect(config, function (err, client, done) {
 		let lat = parseInt(req.query.lat);
 		let long = parseInt(req.query.long);
 		
-		let twitLat = parseFloat(req.query.lat);
-		let twitLon = parseFloat(req.query.long);
+		let twitLat = (lat / 185.324877741).toFixed(6);
+		let twitLon = (long / 185.324877741).toFixed(6);
 		
 		async.waterfall([
 			function (next) {
