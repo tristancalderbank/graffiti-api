@@ -44,27 +44,6 @@ pg.connect(config, function (err, client, done) {
 		async.waterfall([
 			function (next) {
 				client.query(`SELECT * FROM text WHERE lat=${lat} AND long=${long};`, next);
-			}, 
-			function (results) {
-				var params = {
-					q: 'local event',
-					geocode: lat + ',' + long + ',0.1km',
-					count: 2
-				};
-
-				// Twitter API Request 
-				TwitterClient.get('search/tweets', params)
-				.then(function(tweets) {
-					tweets.statuses.forEach(function(tweet) {
-						var displayItem = {
-							userName: tweet['screen_name'],
-							messageText: tweet['text']
-						};
-						console.log(displayItem);
-					});
-				}).catch(function(error) {
-					console.error(error);
-				});
 			}
 		],
 		function (err, results) {
@@ -74,6 +53,7 @@ pg.connect(config, function (err, client, done) {
 			}
 			
 			else if (results && results.rows) {
+				getTweets(results.rows);
 				res.status(200).send(JSON.stringify(results.rows));
 				console.log(results.rows);
 			}	
@@ -83,6 +63,29 @@ pg.connect(config, function (err, client, done) {
 			}
 
 	});
+
+	function getTweets(results) {
+		var params = {
+			q: 'local event',
+			//geocode: lat + ',' + long + ',0.1km',
+			count: 2
+		};
+		console.log(results);
+
+		// Twitter API Request 
+		TwitterClient.get('search/tweets', params)
+		.then(function(tweets) {
+			tweets.statuses.forEach(function(tweet) {
+				var displayItem = {
+					userName: tweet['screen_name'],
+					messageText: tweet['text']
+				};
+				//console.log(displayItem);
+			});
+		}).catch(function(error) {
+			console.error(error);
+		});
+	}
 
 
 	// POST content
