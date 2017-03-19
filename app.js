@@ -23,7 +23,7 @@ var TwitterClient = new Twitter({
 function getTweets(results, lat, lon) {
 	var params = {
 		q: 'local event',
-		geocode: lat.toString() + ',' + lon.toString() + ',0.1km',
+		//geocode: lat.toString() + ',' + lon.toString() + ',0.1km',
 		count: 10
 	};
 
