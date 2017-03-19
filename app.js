@@ -82,6 +82,7 @@ pg.connect(config, function (err, client, done) {
 					userName: tweet['screen_name'],
 					messageText: tweet['text']
 				};
+				results.push(displayItem);
 				//console.log(displayItem);
 			});
 		}).catch(function(error) {
