@@ -35,14 +35,35 @@ pg.connect(config, function (err, client, done) {
 	app.get('/content', (req, res) => {
 
 
+		console.log("GET /content");
+
 		console.log(req.query);
 
-		let lat = parseFloat(req.query.lat);
-		let long = parseFloat(req.query.long);
+		let lat = parseInt(req.query.lat);
+		let long = parseInt(req.query.long);
 
-		console.log(lat, long);
+		
+		async.waterfall([
+			function (next) {
+				client.query(`SELECT * FROM text WHERE lat=${lat} AND long=${long};`, next);
+			}
+		],
+		function (err, results) {
+			if (err) {
+				res.status(500).send("ERROR getting from DB");
+				console.error('Error inserting into text DB', err);
+			}
+			
+			else if (results && results.rows) {
+				res.status(200).send(JSON.stringify(results.rows));
+				console.log(results.rows);
+			}	
+			
+			else {
 
-		res.send('Recieved GET');
+			res.status(400).send("Could not find anything matching that in the database");
+			}
+
 
 		var params = {
 			//geocode: ,
@@ -72,29 +93,38 @@ pg.connect(config, function (err, client, done) {
 			res.status(400).send(bodyErrors);
 		}
 
-		console.log("Body:");
-		console.log(req.body);
+		else {
 
-		const contentType = req.body.type;
-		const content = req.body.content;
-		const lat = req.body.location.lat;
-		const long = req.body.location.long;
 
-		
-		async.waterfall([
-			function (next) {
-				client.query(`INSERT INTO text (content, lat, long) VALUES ('${content}', ${lat}, ${long});`, next);
-			}
-		],
-		function (err, results) {
-			if (err) {
-				console.error('Error inserting into text DB', err);
-			}
+			console.log("Body:");
+			console.log(req.body);
+
+			const contentType = req.body.type;
+			const content = req.body.content;
+			const lat = req.body.location.lat;
+			const long = req.body.location.long;
+			const userName = req.body.userName;
+
 			
-			console.log(results);
-			res.status(200).send(req.body);
-		});
-		
+			async.waterfall([
+				function (next) {
+					client.query("INSERT INTO text (userName, content, lat, long) VALUES ($1::text, $2::text, $3::int, $4::int);", [userName, content, lat, long], next);
+				}
+			],
+			function (err, results) {
+				if (err) {
+					res.status(500).send("ERROR inserting into DB");
+					console.error('Error inserting into text DB', err);
+				}
+				
+				console.log(results);
+				res.status(200).send(req.body);
+			});
+			
+		}
+
+	});
+
 
 	});
 
