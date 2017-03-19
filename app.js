@@ -46,6 +46,22 @@ pg.connect(config, function (err, client, done) {
 		async.waterfall([
 			function (next) {
 				client.query(`SELECT * FROM text WHERE lat=${lat} AND long=${long};`, next);
+			}, 
+			function (results) {
+				var params = {
+					q: 'node.js',
+					//geocode: ,
+					count: 2
+				};
+
+				// Twitter API Request 
+				client.get('search/tweets', params)
+				.then(function(tweets) {
+					//results.push();
+					console.log(tweets);
+				}).catch(function(error) {
+					console.error(error);
+				});
 			}
 		],
 		function (err, results) {
@@ -60,23 +76,8 @@ pg.connect(config, function (err, client, done) {
 			}	
 			
 			else {
-
-			res.status(400).send("Could not find anything matching that in the database");
+				res.status(400).send("Could not find anything matching that in the database");
 			}
-
-
-		var params = {
-			//geocode: ,
-			count: 10
-		};
-
-		// Twitter API Request 
-		client.get('search/tweets', params)
-		.then(function(tweets) {
-			console.log(tweets);
-		}).catch(function(error) {
-			console.error(error);
-		});
 
 	});
 
